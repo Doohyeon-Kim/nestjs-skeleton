@@ -1,0 +1,8 @@
+db:
+  host: "localhost"
+  port: 5432
+  database: "dooadex_skeleton"
+  synchronize: true
+
+jwt:
+  secret: "dooadexSecret"
