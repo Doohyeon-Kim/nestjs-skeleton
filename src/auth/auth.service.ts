@@ -1,21 +1,77 @@
-import {Injectable, Logger} from '@nestjs/common';
-import {InjectRepository} from "@nestjs/typeorm";
+import {ConflictException, Injectable, InternalServerErrorException, Logger, Post} from '@nestjs/common';
 import {AppDataSource} from "../index";
-import {User} from "../user/user.entity";
-import {CreateUserDto} from "../user/dto/create-user.dto";
-import {DataSource} from "typeorm";
+import * as bcrypt from "bcrypt";
+import {JwtService} from "@nestjs/jwt";
+import {SignInDto} from "./dto/sign-in.dto";
+import { CreateUserDto } from '../users/dto/create-user.dto';
+import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class AuthService {
-    // constructor(private userRepository = AppDataSource.getRepository(User)) {
-    // }
-    //
-    // async signUp(createUserDto: CreateUserDto) {
-    //     // const userRepository = AppDataSource.getRepository(User);
-    //     await this.userRepository.find({where: {email: createUserDto.email}});
-    //     await this.userRepository.save(createUserDto);
-    //
-    //     Logger.log("User Saved"); ///
-    //
-    // }
+    // constructor(@InjectRepository(User) private userRepository: Repository<User>){}
+
+    constructor(
+        private userRepository = AppDataSource.getRepository(User),
+        private jwtService: JwtService) {
+    }
+
+    sendVerificationEmail(email: string, verificationToken: string){
+        // await this.emailService.sendVerificationEmail(, verificationToken: string);
+    }
+
+    // private async send
+
+    async verifyEmail(signUpVerificationToken: string): Promise<string>{
+
+        //TODO
+
+        throw new Error("Method not implemented.");
+    }
+
+
+    async signUp(createUserDto: CreateUserDto): Promise<User> {
+
+        const existingUser: User = await this.userRepository.findOne({where: {email: createUserDto.email}});
+
+        if (existingUser) {
+            Logger.log("The user exists already."); ///
+        } else {
+            const hashedPassword: string = await bcrypt.hash(createUserDto.password, await bcrypt.genSalt());
+            const user: User = await this.userRepository.create({
+                nickname: createUserDto.nickname,
+                password: hashedPassword
+            });
+            try {
+                await this.userRepository.save(user);
+                Logger.log("User Saved");
+
+                const payload: { email: string } = {
+                    email: createUserDto.email,
+                };
+
+
+                // let userDto: UserDto = new UserDto();
+                // userDto.access_token = this.jwtService.sign(payload);
+                // userDto.user_id = user.user_id;
+                // userDto.email = user.email;
+                // userDto.nickname = user.nickname;
+
+                return user;
+            } catch (error) {
+                if (error.code === "233505") {
+                    throw new ConflictException("Existing username");
+                } else {
+                    throw new InternalServerErrorException();
+                }
+            }
+        }
+    }
+
+    async signIn(signInDto: SignInDto): Promise<string> {
+
+        throw new Error("Method not implemented");
+    }
+
+
+
 }
