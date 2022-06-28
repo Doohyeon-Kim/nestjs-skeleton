@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { SignInDto } from './dto/sign-in.dto';
 import { CreateUserDto } from '../users/dto/create-user.dto';
+import { User } from '../users/entities/user.entity';
 
 @Controller('auth')
 @ApiTags('Auth API')
@@ -14,7 +15,7 @@ export class AuthController {
   @HttpCode(201)
   @Post('/sign-up')
   @ApiOperation({ summary: 'Sign Up API', description: 'Create User' })
-  // @ApiCreatedResponse({ description: '유저를 생성한다.', type: User })
+  @ApiCreatedResponse({ description: 'create user.', type: User })
   async signUp(@Req() request: Request, @Body() createUserDto: CreateUserDto): Promise<void> {
     Logger.log(createUserDto);
     await this.authService.signUp(createUserDto);

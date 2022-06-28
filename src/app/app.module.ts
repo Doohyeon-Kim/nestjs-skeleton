@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import emailConfig from '../config/email.config';
-import { typeOrmConfig } from '../config/typeorm.config';
+import { typeORMConfig } from '../config/typeorm.config';
 import { validationSchema } from '../config/validationSchema';
 import { CoreModule } from '../core/core.module';
 
@@ -21,7 +21,7 @@ import { CoreModule } from '../core/core.module';
       isGlobal: true,
       validationSchema: validationSchema,
     }),
-    TypeOrmModule.forRoot(typeOrmConfig),
+    TypeOrmModule.forRoot(typeORMConfig),
   ],
   controllers: [],
   providers: [],

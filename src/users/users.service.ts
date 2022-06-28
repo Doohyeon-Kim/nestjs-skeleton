@@ -1,11 +1,29 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { AppDataSource } from '../index';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+
+  constructor(
+    private userRepository = AppDataSource.getRepository(User),
+    // private jwtService: JwtService
+  ) {
+  }
+
+  async create(email: string, nickname: string, password: string) {
+    const user: User = await this.userRepository.create({ email, nickname, password });
+    try {
+      await this.userRepository.save(user);
+      Logger.log(`User Saved: ${user}`);
+      return user;
+    } catch (error) {
+
+      throw new InternalServerErrorException();
+    }
+
+
   }
 
   findAll() {
@@ -14,6 +32,10 @@ export class UsersService {
 
   findOne(id: number) {
     return `This action returns a #${id} user`;
+  }
+
+  async findByEmail(email: string) {
+    return await this.userRepository.findOne({ where: { email: email } });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
