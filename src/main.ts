@@ -23,6 +23,7 @@ async function bootstrap() {
     .setTitle('Dooadex Skeleton API Docs')
     .setDescription('Dooadex Skeleton API description')
     .setVersion('1.0')
+    .addTag('')
     // .addBearerAuth(
     //   { type: "http", scheme: "bearer", bearerFormat: "Token" },
     //   "access-token"
@@ -37,7 +38,7 @@ async function bootstrap() {
 
 
   const document = SwaggerModule.createDocument(app, swaggerConfig, swaggerOption);
-  SwaggerModule.setup('docs/swagger', app, document);
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(3000);
 }

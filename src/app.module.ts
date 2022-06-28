@@ -3,6 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import emailConfig from './config/email.config';
 import { typeOrmConfig } from './config/typeorm.config';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 // import { AppService } from './app.service';
 // import { AppController } from './app.controller';
@@ -28,6 +30,7 @@ import { typeOrmConfig } from './config/typeorm.config';
       // validationSchema: validationSchema,
     }),
     TypeOrmModule.forRoot(typeOrmConfig),
+    AuthModule, UsersModule
   ],
   controllers: [],
   providers: [],

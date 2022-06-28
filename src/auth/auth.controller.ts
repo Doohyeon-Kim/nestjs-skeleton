@@ -5,8 +5,8 @@ import { SignInDto } from './dto/sign-in.dto';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { User } from '../users/entities/user.entity';
 
-@ApiTags('Auth API')
 @Controller('auth')
+@ApiTags('Auth API')
 export class AuthController {
 
   constructor(private authService: AuthService) {
@@ -14,9 +14,9 @@ export class AuthController {
 
   // @HttpCode(201)
   // @ApiBody({type: CreateUserDto})
-  // @ApiOperation({ summary: 'Sign Up API', description: 'Create User' })
   // @ApiCreatedResponse({ description: 'create user.', type: User })
   @Post('/sign-up')
+  @ApiOperation({ summary: 'Sign Up API', description: 'Create User' })
   async signUp(@Req() request: Request, @Body() createUserDto: CreateUserDto): Promise<void> {
     Logger.log(createUserDto);
     await this.authService.signUp(createUserDto);

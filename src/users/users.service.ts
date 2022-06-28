@@ -1,12 +1,14 @@
-import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
+import { forwardRef, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AppDataSource } from '../index';
 import { User } from './entities/user.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class UsersService {
 
   constructor(
+    @InjectRepository(User)
     private userRepository = AppDataSource.getRepository(User),
     // private jwtService: JwtService
   ) {

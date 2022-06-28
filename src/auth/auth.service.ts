@@ -1,4 +1,12 @@
-import { ConflictException, Injectable, InternalServerErrorException, Logger, Post } from '@nestjs/common';
+import {
+  ConflictException,
+  forwardRef,
+  Inject,
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+  Post,
+} from '@nestjs/common';
 import { AppDataSource } from '../index';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
@@ -14,8 +22,11 @@ export class AuthService {
   constructor(
     // private userRepository = AppDataSource.getRepository(User),
 
-    private userService: UsersService,
-    private jwtService: JwtService) {
+
+    @Inject(forwardRef(() => UsersService))
+    private readonly _userService: UsersService,
+    // private jwtService: JwtService
+  ) {
   }
 
   sendVerificationEmail(email: string, verificationToken: string) {
@@ -34,7 +45,7 @@ export class AuthService {
 
   async signUp(createUserDto: CreateUserDto): Promise<User> {
 
-    const existingUser: User = await this.userService.findByEmail(createUserDto.email);
+    const existingUser: User = await this._userService.findByEmail(createUserDto.email);
 
 
     if (existingUser) {
@@ -42,7 +53,7 @@ export class AuthService {
     } else {
       const hashedPassword: string = await bcrypt.hash(createUserDto.password, await bcrypt.genSalt());
 
-      return await this.userService.create(
+      return await this._userService.create(
         createUserDto.email,
         createUserDto.nickname,
         hashedPassword,
