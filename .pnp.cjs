@@ -46,6 +46,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/express", "npm:4.17.13"],\
             ["@types/js-yaml", "npm:4.0.5"],\
             ["@types/node", "npm:18.0.0"],\
+            ["@types/nodemailer", "npm:6.4.4"],\
             ["@types/passport", "npm:0.4.7"],\
             ["@types/pg", "npm:8.6.5"],\
             ["@types/source-map-support", "npm:0.5.4"],\
@@ -58,6 +59,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["express", "npm:4.18.1"],\
             ["joi", "npm:17.6.0"],\
             ["js-yaml", "npm:4.1.0"],\
+            ["nodemailer", "npm:6.7.5"],\
             ["npm", "npm:8.13.1"],\
             ["passport", "npm:0.6.0"],\
             ["passport-jwt", "npm:4.0.0"],\
@@ -1187,6 +1189,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         ["npm:18.0.0", {\
           "packageLocation": "./.yarn/cache/@types-node-npm-18.0.0-c8497066c5-aab2b32572.zip/node_modules/@types/node/",\
           "packageDependencies": [\
+            ["@types/node", "npm:18.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/nodemailer", [\
+        ["npm:6.4.4", {\
+          "packageLocation": "./.yarn/cache/@types-nodemailer-npm-6.4.4-c5c500abe2-16ed1bad2c.zip/node_modules/@types/nodemailer/",\
+          "packageDependencies": [\
+            ["@types/nodemailer", "npm:6.4.4"],\
             ["@types/node", "npm:18.0.0"]\
           ],\
           "linkType": "HARD"\
@@ -2688,6 +2700,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/express", "npm:4.17.13"],\
             ["@types/js-yaml", "npm:4.0.5"],\
             ["@types/node", "npm:18.0.0"],\
+            ["@types/nodemailer", "npm:6.4.4"],\
             ["@types/passport", "npm:0.4.7"],\
             ["@types/pg", "npm:8.6.5"],\
             ["@types/source-map-support", "npm:0.5.4"],\
@@ -2700,6 +2713,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["express", "npm:4.18.1"],\
             ["joi", "npm:17.6.0"],\
             ["js-yaml", "npm:4.1.0"],\
+            ["nodemailer", "npm:6.7.5"],\
             ["npm", "npm:8.13.1"],\
             ["passport", "npm:0.6.0"],\
             ["passport-jwt", "npm:4.0.0"],\
@@ -4698,6 +4712,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/node-releases-npm-2.0.5-ddba717991-e85d949add.zip/node_modules/node-releases/",\
           "packageDependencies": [\
             ["node-releases", "npm:2.0.5"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["nodemailer", [\
+        ["npm:6.7.5", {\
+          "packageLocation": "./.yarn/cache/nodemailer-npm-6.7.5-8ef278d3aa-d361a107b9.zip/node_modules/nodemailer/",\
+          "packageDependencies": [\
+            ["nodemailer", "npm:6.7.5"]\
           ],\
           "linkType": "HARD"\
         }]\

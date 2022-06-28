@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 @Global()
 @Module({
   imports: [
-    ConfigService,
+    // ConfigService,
   ],
   // providers: [CommonService],
   // exports: [CommonService],

@@ -1,34 +1,33 @@
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import * as config from 'config';
-
-const dbConfig = config.get('db');
-export const typeORMConfig: TypeOrmModuleOptions = {
-  type: dbConfig.type,
-  host: process.env.RDS_HOSTNAME || dbConfig.host,
-  port: process.env.RDS_PORT || dbConfig.port,
-  username: process.env.RDS_USERNAME || dbConfig.username,
-  password: process.env.RDS_PASSWORD || dbConfig.password,
-  database: process.env.RDS_DB_NAME || dbConfig.database,
-  entities: [__dirname + '/../**/*.entity.{js,ts}'],
-  synchronize: dbConfig.synchronize,
-};
-
-
 // import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-// // import { ConfigService } from '@nestjs/config';
 // import * as config from 'config';
 //
-//
 // const dbConfig = config.get('db');
-//
-// export const typeOrmConfig: TypeOrmModuleOptions = {
-//   type: "postgres",
-//   host: process.env.RDS_HOSTNAME || "localhost",
-//   port: process.env.RDS_PORT || 5432,
+// export const typeORMConfig: TypeOrmModuleOptions = {
+//   type: dbConfig.type,
+//   host: process.env.RDS_HOSTNAME || dbConfig.host,
+//   port: process.env.RDS_PORT || dbConfig.port,
 //   username: process.env.RDS_USERNAME || dbConfig.username,
 //   password: process.env.RDS_PASSWORD || dbConfig.password,
 //   database: process.env.RDS_DB_NAME || dbConfig.database,
 //   entities: [__dirname + '/../**/*.entity.{js,ts}'],
 //   synchronize: dbConfig.synchronize,
 // };
-//
+
+
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+// import { ConfigService } from '@nestjs/config';
+import * as config from 'config';
+
+;
+
+export const typeOrmConfig: TypeOrmModuleOptions = {
+  type: 'postgres',
+  host: process.env.RDS_HOSTNAME || process.env.DATABASE_HOST,
+  port: parseInt(process.env.RDS_PORT) || 5432,
+  username: process.env.RDS_USERNAME || process.env.DATABASE_USERNAME,
+  password: process.env.RDS_PASSWORD || process.env.DATABASE_PASSWORD,
+  database: process.env.RDS_DB_NAME || 'dooadex-skeleton',
+  entities: [__dirname + '/../**/*.entity.{js,ts}'],
+  synchronize: Boolean(process.env.DATABASE_SYNCHRONIZE),
+};
+

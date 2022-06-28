@@ -1,21 +1,22 @@
-import { Body, Controller, HttpCode, Logger, Post, Query, Req } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Logger, Post, Query, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { SignInDto } from './dto/sign-in.dto';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { User } from '../users/entities/user.entity';
 
-@Controller('auth')
 @ApiTags('Auth API')
+@Controller('auth')
 export class AuthController {
 
   constructor(private authService: AuthService) {
   }
 
-  @HttpCode(201)
+  // @HttpCode(201)
+  // @ApiBody({type: CreateUserDto})
+  // @ApiOperation({ summary: 'Sign Up API', description: 'Create User' })
+  // @ApiCreatedResponse({ description: 'create user.', type: User })
   @Post('/sign-up')
-  @ApiOperation({ summary: 'Sign Up API', description: 'Create User' })
-  @ApiCreatedResponse({ description: 'create user.', type: User })
   async signUp(@Req() request: Request, @Body() createUserDto: CreateUserDto): Promise<void> {
     Logger.log(createUserDto);
     await this.authService.signUp(createUserDto);
