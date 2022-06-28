@@ -1,39 +1,42 @@
-import {Injectable} from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import Mail from 'nodemailer/lib/mailer';
 import * as nodemailer from 'nodemailer';
+import emailConfig from '../config/email.config';
+import { ConfigType } from '@nestjs/config';
 
 interface EmailOptions {
-    to: string;
-    subject: string;
-    html: string;
+  to: string;
+  subject: string;
+  html: string;
 }
 
 @Injectable()
 export class EmailService {
-    private transporter: Mail;
+  private transporter: Mail;
 
-    constructor() {
-        this.transporter = nodemailer.createTransport({
-            service: 'Gmail',
-            auth: {
-                user: "doohyeon.kim@dooadex.com",
-                pass: "Your password"
-            }
-        });
-    }
+  constructor(
+    @Inject(emailConfig.KEY) private config: ConfigType<typeof emailConfig>) {
+    this.transporter = nodemailer.createTransport({
+      service: config.service,
+      auth: {
+        user: config.auth.user,
+        pass: 'Your password',
+      },
+    });
+  }
 
-    async sendVerificationEmail(emailAddress: string, signUpVerificationToken: string) {
-        const baseUrl = "http//localhost:3000";
-        const url = `${baseUrl}/auth/email-verify?signUpVerificationToken=${signUpVerificationToken}`;
-        const mailOptions: EmailOptions = {
-            to: emailAddress,
-            subject: "가입 인증 메일",
-            html: ` 
+  async sendVerificationEmail(emailAddress: string, signUpVerificationToken: string) {
+    const baseUrl = this.config.baseUrl;
+    const url = `${baseUrl}/auth/email-verify?signUpVerificationToken=${signUpVerificationToken}`;
+    const mailOptions: EmailOptions = {
+      to: emailAddress,
+      subject: '가입 인증 메일',
+      html: ` 
             가입확인 버튼를 누르시면 가입 인증이 완료됩니다.<br/>
-            <form action="${url}" method="POST">
+            <form action='${url}' method='POST'>
             <button>가입확인</button>
-            </form>`
-        }
-        return await this.transporter.sendMail(mailOptions);
-    }
+            </form>`,
+    };
+    return await this.transporter.sendMail(mailOptions);
+  }
 }

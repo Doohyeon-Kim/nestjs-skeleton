@@ -1,7 +1,7 @@
 import {PassportStrategy} from "@nestjs/passport";
 import {Strategy, ExtractJwt} from "passport-jwt";
 import {AppDataSource} from "../index";
-import * as config from "config";
+import * as config from 'config';
 import {UnauthorizedException} from "@nestjs/common";
 import { User } from '../users/entities/user.entity';
 
