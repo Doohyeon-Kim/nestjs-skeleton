@@ -12,11 +12,11 @@ export class AuthController {
   constructor(private authService: AuthService) {
   }
 
-  // @HttpCode(201)
-  // @ApiBody({type: CreateUserDto})
-  // @ApiCreatedResponse({ description: 'create user.', type: User })
-  @Post('/sign-up')
+  @ApiBody({type: CreateUserDto})
+  @ApiCreatedResponse({ description: 'create user.', type: User })
   @ApiOperation({ summary: 'Sign Up API', description: 'Create User' })
+  @Post('/sign-up')
+  @HttpCode(201)
   async signUp(@Req() request: Request, @Body() createUserDto: CreateUserDto): Promise<void> {
     Logger.log(createUserDto);
     await this.authService.signUp(createUserDto);

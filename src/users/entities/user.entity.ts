@@ -1,10 +1,10 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class User {
   // @ApiProperty()
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   user_id: string;
 
   @Column()
@@ -18,17 +18,23 @@ export class User {
 
   @Column({
     name: 'current_hashed_refresh_token',
-    nullable: true
+    nullable: true,
   })
   currentHashedRefreshToken?: string;
 
 
-  @Column({type: 'timestamp'})
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(10)',
+  })
   created_at: Date;
 
-  @Column({type: 'timestamp'})
+  @UpdateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(10)',
+  })
   updated_at: Date;
 
-  @Column({type: 'timestamp'})
+  @DeleteDateColumn({ type: 'timestamp' })
   deleted_at: Date;
 }

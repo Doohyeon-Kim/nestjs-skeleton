@@ -28,6 +28,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   password: process.env.RDS_PASSWORD || process.env.DATABASE_PASSWORD,
   database: process.env.RDS_DB_NAME || 'dooadex-skeleton',
   entities: [__dirname + '/../**/*.entity.{js,ts}'],
-  synchronize: Boolean(process.env.DATABASE_SYNCHRONIZE),
+  // synchronize: Boolean(process.env.DATABASE_SYNCHRONIZE),
+  synchronize: Boolean(true)
 };
 

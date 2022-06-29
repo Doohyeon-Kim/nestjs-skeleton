@@ -47,12 +47,10 @@ export class AuthService {
 
     const existingUser: User = await this._userService.findByEmail(createUserDto.email);
 
-
     if (existingUser) {
       Logger.log('The user exists already.'); ///
     } else {
       const hashedPassword: string = await bcrypt.hash(createUserDto.password, await bcrypt.genSalt());
-
       return await this._userService.create(
         createUserDto.email,
         createUserDto.nickname,
