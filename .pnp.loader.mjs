@@ -123,10 +123,10 @@ function getFileFormat(filepath) {
       return `commonjs`;
     }
     case `.wasm`: {
-      throw new Error(`Unknown file extension ".wasm" for ${filepath}`);
+      throw new DhkError(`Unknown file extension ".wasm" for ${filepath}`);
     }
     case `.json`: {
-      throw new Error(`Unknown file extension ".json" for ${filepath}`);
+      throw new DhkError(`Unknown file extension ".json" for ${filepath}`);
     }
     case `.js`: {
       const pkg = readPackageScope(filepath);
@@ -222,7 +222,7 @@ async function resolve$1(originalSpecifier, context, defaultResolver) {
     extensions: allowLegacyResolve ? void 0 : []
   });
   if (!result)
-    throw new Error(`Resolving '${specifier}' from '${issuer}' failed`);
+    throw new DhkError(`Resolving '${specifier}' from '${issuer}' failed`);
   const resultURL = pathToFileURL(result);
   if (url) {
     resultURL.search = url.search;

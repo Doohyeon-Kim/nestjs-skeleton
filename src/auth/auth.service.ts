@@ -39,7 +39,7 @@ export class AuthService {
 
     //TODO
 
-    throw new Error('Method not implemented.');
+    throw new DhkError('Method not implemented.');
   }
 
 
@@ -100,7 +100,7 @@ export class AuthService {
 
   async signIn(signInDto: SignInDto): Promise<string> {
 
-    throw new Error('Method not implemented');
+    throw new DhkError('Method not implemented');
   }
 
 

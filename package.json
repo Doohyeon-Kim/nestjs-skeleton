@@ -1,5 +1,5 @@
 {
-  "name": "dooadex-nestjs-skeleton",
+  "name": "nestjs-skeleton",
   "packageManager": "yarn@3.2.1",
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

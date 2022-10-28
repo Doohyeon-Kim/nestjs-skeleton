@@ -26,7 +26,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   port: parseInt(process.env.RDS_PORT) || 5432,
   username: process.env.RDS_USERNAME || process.env.DATABASE_USERNAME,
   password: process.env.RDS_PASSWORD || process.env.DATABASE_PASSWORD,
-  database: process.env.RDS_DB_NAME || 'dooadex-skeleton',
+  database: process.env.RDS_DB_NAME || 'skeleton',
   entities: [__dirname + '/../**/*.entity.{js,ts}'],
   // synchronize: Boolean(process.env.DATABASE_SYNCHRONIZE),
   synchronize: Boolean(true)
