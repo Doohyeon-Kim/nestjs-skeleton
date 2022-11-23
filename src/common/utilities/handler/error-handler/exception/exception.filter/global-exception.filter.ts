@@ -1,6 +1,5 @@
 // import {ArgumentsHost, Catch, ExceptionFilter} from "@nestjs/common";
 // import {Response} from "express";
-// import {DhkException} from "../dcb.exception";
 //
 // @Catch()
 // export  class GlobalExceptionFilter implements ExceptionFilter{
