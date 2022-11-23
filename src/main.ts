@@ -10,18 +10,17 @@ async function bootstrap() {
   // app.use(['/docs/swagger'],);
 
   // const swaggerConfig = new DocumentBuilder()
-  //   .setTitle('Dooadex Skeleton API Docs')
-  //   .setDescription('Dooadex Skeleton API description')
+  //   .setTitle('Nest Skeleton API Docs')
+  //   .setDescription('Nest Skeleton API description')
   //   .setVersion('1.0.0')
   //   .build();
   //
 
-
   // app.setGlobalPrefix('/api/development');
 
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('Dooadex Skeleton API Docs')
-    .setDescription('Dooadex Skeleton API description')
+    .setTitle('Nest Skeleton API Docs')
+    .setDescription('Nest Skeleton API description')
     .setVersion('1.0')
     .addTag('')
     // .addBearerAuth(
